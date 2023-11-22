@@ -1,14 +1,18 @@
+import { useSelector } from 'react-redux';
 import styles from './contactList.module.css';
 import PropTypes from 'prop-types';
 
-export function ContactList({ contactList, filter, setContacts }) {
-  if (contactList === null) {
+export function ContactList() {
+  // { contactList, filter, setContacts }
+  const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
+  if (contacts === null) {
     return null;
   }
   if (filter === '') {
     return (
       <ul className={styles['contact-list']}>
-        {contactList.map(item => (
+        {contacts.map(item => (
           <li className={styles.contact} key={item.id}>
             <p>
               {item.name}: {item.number}
@@ -17,11 +21,11 @@ export function ContactList({ contactList, filter, setContacts }) {
               type="button"
               className={styles.button}
               id={item.id}
-              onClick={e => {
-                setContacts(
-                  contactList.filter(item => item.id !== e.target.id)
-                );
-              }}
+              // onClick={e => {
+              //   setContacts(
+              //     contactList.filter(item => item.id !== e.target.id)
+              //   );
+              // }}
             >
               Delete
             </button>
@@ -33,7 +37,7 @@ export function ContactList({ contactList, filter, setContacts }) {
   let dispName;
   let dispNumber;
   let id;
-  contactList.forEach(contact => {
+  contacts.forEach(contact => {
     if (contact.name.toLowerCase().includes(filter.toLowerCase())) {
       dispName = contact.name;
       dispNumber = contact.number;

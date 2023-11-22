@@ -10,9 +10,24 @@ const contactsInitState = () => {
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: contactsInitState(),
-  reducer: {
-    addContact: {},
-    deleteContact: {},
+  reducers: {
+    addContact: {
+      reducer(state, action) {
+        state.push(action.payload);
+      },
+      prepare(name, number, id) {
+        return {
+          payload: {
+            name,
+            number,
+            id,
+          },
+        };
+      },
+    },
+    deleteContact(state, action) {
+      state.filter(item => item.id !== action.payload);
+    },
   },
 });
 

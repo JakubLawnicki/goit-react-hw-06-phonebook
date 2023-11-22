@@ -1,19 +1,21 @@
+import { useSelector } from 'react-redux';
 import { ContactForm } from './contactForm/ContactForm';
 import { ContactList } from './contactList/ContactList';
 import { Filter } from './filter/Filter';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 export function App() {
-  const initialValue = () => {
-    if (JSON.parse(localStorage.getItem('contacts')) === null) {
-      return [];
-    }
-    return JSON.parse(localStorage.getItem('contacts'));
-  };
-  const [contacts, setContacts] = useState(initialValue());
-  const [filter, setFilter] = useState('');
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  // const initialValue = () => {
+  //   if (JSON.parse(localStorage.getItem('contacts')) === null) {
+  //     return [];
+  //   }
+  //   return JSON.parse(localStorage.getItem('contacts'));
+  // };
+  // // const [contacts, setContacts] = useState(initialValue());
+  // // const [filter, setFilter] = useState('');
+  // // const [name, setName] = useState('');
+  // // const [number, setNumber] = useState('');
+  const contacts = useSelector(state => state.contacts);
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -35,19 +37,21 @@ export function App() {
     >
       <h1>Phonebook</h1>
       <ContactForm
-        contactList={contacts}
-        name={name}
-        number={number}
-        setName={setName}
-        setNumber={setNumber}
-        setContacts={setContacts}
+      // contactList={contacts}
+      // name={name}
+      // number={number}
+      // setName={setName}
+      // setNumber={setNumber}
+      // setContacts={setContacts}
       />
       <h2>Contacts</h2>
-      <Filter filter={filter} setFilter={setFilter} />
+      <Filter
+      // filter={filter} setFilter={setFilter}
+      />
       <ContactList
-        contactList={contacts}
-        filter={filter}
-        setContacts={setContacts}
+      // contactList={contacts}
+      // filter={filter}
+      // setContacts={setContacts}
       />
     </div>
   );

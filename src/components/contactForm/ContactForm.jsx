@@ -1,33 +1,53 @@
 import styles from './contactForm.module.css';
 import { nanoid } from 'nanoid';
+import { useSelector } from 'react-redux';
+// import { contactsReducer } from 'redux/contactsSlice';
+import { addContact } from 'redux/contactsSlice';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-export function ContactForm({
-  contactList,
-  name,
-  number,
-  setContacts,
-  setName,
-  setNumber,
-}) {
+export function ContactForm() {
+  // {
+  //   // contactList,
+  //   // name,
+  //   // number,
+  //   // setContacts,
+  //   // setName,
+  //   // setNumber,
+  // }
   const id = nanoid();
+  const contacts = useSelector(state => state.contacts);
+  const dispatch = useDispatch();
+
+  let name;
+  let number;
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    for (const contact of contacts) {
+      if (contact.name.toLowerCase() === name.toLowerCase()) {
+        return alert(contact.name + ' is already in contacts.');
+      }
+    }
+    console.log(addContact);
+    dispatch(addContact(name, number, id));
+  };
 
   return (
     <form
       className={styles.form}
-      onSubmit={e => {
-        e.preventDefault();
+      onSubmit={handleSubmit}
+      // e.preventDefault();
 
-        for (const contact of contactList) {
-          if (contact.name.toLowerCase() === name.toLowerCase()) {
-            return alert(contact.name + ' is already in contacts.');
-          }
-        }
+      // for (const contact of contactList) {
+      //   if (contact.name.toLowerCase() === name.toLowerCase()) {
+      //     return alert(contact.name + ' is already in contacts.');
+      //   }
+      // }
 
-        setContacts([...contactList, { name, number, id }]);
-        setName((name = ''));
-        setNumber((number = ''));
-      }}
+      // setContacts([...contactList, { name, number, id }]);
+      // setName((name = ''));
+      // setNumber((number = ''));
     >
       <label className={styles.label} htmlFor="name">
         Name
@@ -35,7 +55,7 @@ export function ContactForm({
       <input
         className={styles['input-name']}
         onChange={e => {
-          setName((name = e.target.value));
+          name = e.target.value;
         }}
         type="text"
         name="name"
@@ -51,7 +71,7 @@ export function ContactForm({
       <input
         className={styles['input-tel']}
         onChange={e => {
-          setNumber((number = e.target.value));
+          number = e.target.value;
         }}
         type="tel"
         name="number"
@@ -61,23 +81,7 @@ export function ContactForm({
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
       />
-      <button
-        className={styles.button}
-        onSubmit={e => {
-          e.preventDefault();
-
-          for (const contact of contactList) {
-            if (contact.name.toLowerCase() === name.toLowerCase()) {
-              return alert(contact.name + ' is already in contacts.');
-            }
-          }
-
-          setContacts([...contactList, { name, number, id }]);
-          setName((name = ''));
-          setNumber((number = ''));
-        }}
-        type="submit"
-      >
+      <button className={styles.button} type="submit">
         Add contact
       </button>
     </form>
