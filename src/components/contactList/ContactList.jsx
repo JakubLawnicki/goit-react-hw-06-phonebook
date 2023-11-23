@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/contactsSlice';
 import styles from './contactList.module.css';
 import PropTypes from 'prop-types';
 
@@ -6,6 +7,12 @@ export function ContactList() {
   // { contactList, filter, setContacts }
   const contacts = useSelector(state => state.contacts);
   const filter = useSelector(state => state.filter);
+  const dispatch = useDispatch();
+
+  const handleClick = itemId => {
+    dispatch(deleteContact(itemId));
+  };
+
   if (contacts === null) {
     return null;
   }
@@ -26,6 +33,9 @@ export function ContactList() {
               //     contactList.filter(item => item.id !== e.target.id)
               //   );
               // }}
+              onClick={() => {
+                handleClick(item.id);
+              }}
             >
               Delete
             </button>

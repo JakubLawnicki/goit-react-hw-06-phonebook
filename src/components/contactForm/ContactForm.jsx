@@ -1,9 +1,8 @@
 import styles from './contactForm.module.css';
 import { nanoid } from 'nanoid';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // import { contactsReducer } from 'redux/contactsSlice';
 import { addContact } from 'redux/contactsSlice';
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 export function ContactForm() {
@@ -29,7 +28,6 @@ export function ContactForm() {
         return alert(contact.name + ' is already in contacts.');
       }
     }
-    console.log(addContact);
     dispatch(addContact(name, number, id));
   };
 
