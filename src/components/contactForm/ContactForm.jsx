@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
 // import { contactsReducer } from 'redux/contactsSlice';
 import { addContact } from 'redux/contactsSlice';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 export function ContactForm() {
   // {
@@ -17,6 +17,7 @@ export function ContactForm() {
   const id = nanoid();
   const contacts = useSelector(state => state.contacts);
   const dispatch = useDispatch();
+  const form = document.querySelector('form');
 
   let name;
   let number;
@@ -29,6 +30,7 @@ export function ContactForm() {
       }
     }
     dispatch(addContact(name, number, id));
+    form.reset();
   };
 
   return (
@@ -86,11 +88,11 @@ export function ContactForm() {
   );
 }
 
-ContactForm.propTypes = {
-  contactList: PropTypes.array,
-  name: PropTypes.string,
-  number: PropTypes.string,
-  setContacts: PropTypes.func,
-  setName: PropTypes.func,
-  setNumber: PropTypes.func,
-};
+// ContactForm.propTypes = {
+//   contactList: PropTypes.array,
+//   name: PropTypes.string,
+//   number: PropTypes.string,
+//   setContacts: PropTypes.func,
+//   setName: PropTypes.func,
+//   setNumber: PropTypes.func,
+// };

@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contactsSlice';
 import styles from './contactList.module.css';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 export function ContactList() {
   // { contactList, filter, setContacts }
@@ -63,8 +63,8 @@ export function ContactList() {
   );
 }
 
-ContactList.propTypes = {
-  contactList: PropTypes.array,
-  filter: PropTypes.string,
-  setContacts: PropTypes.func,
-};
+// ContactList.propTypes = {
+//   contactList: PropTypes.array,
+//   filter: PropTypes.string,
+//   setContacts: PropTypes.func,
+// };
