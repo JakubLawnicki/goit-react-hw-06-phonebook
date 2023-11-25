@@ -1,19 +1,9 @@
 import styles from './contactForm.module.css';
 import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
-// import { contactsReducer } from 'redux/contactsSlice';
 import { addContact } from 'redux/contactsSlice';
-// import PropTypes from 'prop-types';
 
 export function ContactForm() {
-  // {
-  //   // contactList,
-  //   // name,
-  //   // number,
-  //   // setContacts,
-  //   // setName,
-  //   // setNumber,
-  // }
   const id = nanoid();
   const contacts = useSelector(state => state.contacts);
   const dispatch = useDispatch();
@@ -34,21 +24,7 @@ export function ContactForm() {
   };
 
   return (
-    <form
-      className={styles.form}
-      onSubmit={handleSubmit}
-      // e.preventDefault();
-
-      // for (const contact of contactList) {
-      //   if (contact.name.toLowerCase() === name.toLowerCase()) {
-      //     return alert(contact.name + ' is already in contacts.');
-      //   }
-      // }
-
-      // setContacts([...contactList, { name, number, id }]);
-      // setName((name = ''));
-      // setNumber((number = ''));
-    >
+    <form className={styles.form} onSubmit={handleSubmit}>
       <label className={styles.label} htmlFor="name">
         Name
       </label>
@@ -87,12 +63,3 @@ export function ContactForm() {
     </form>
   );
 }
-
-// ContactForm.propTypes = {
-//   contactList: PropTypes.array,
-//   name: PropTypes.string,
-//   number: PropTypes.string,
-//   setContacts: PropTypes.func,
-//   setName: PropTypes.func,
-//   setNumber: PropTypes.func,
-// };
