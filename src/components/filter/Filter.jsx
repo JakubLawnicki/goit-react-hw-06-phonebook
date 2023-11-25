@@ -7,7 +7,7 @@ export function Filter() {
   const dispatch = useDispatch();
 
   const handleChange = value => {
-    dispatch(updateFilter(value));
+    dispatch(updateFilter.updateFilter(value));
   };
 
   return (
